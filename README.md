@@ -19,9 +19,10 @@
 | name               | string     | nill: false      |
 | price              | integer    | nill: false      |
 | detail             | text       | nill: false      |
+| category_id        | integer    | nill: false      |
 | quality_id         | integer    | nill: false      |
 | origin_shipment_id | integer    | nill: false      |
-| shipping_day_id    | integer    | nill: false      | 
+| shipped_date_id    | integer    | nill: false      | 
 | shipment_burden_id | integer    | nill: false      |
 | user               | references | foreign_key: true|
 
