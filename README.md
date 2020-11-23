@@ -2,13 +2,13 @@
 
 | Colum              | Type   | Options     |
 | nickname           | string | null: false |
-| encrypted_password | string | nill: false |
+| encrypted_password | string | null: false |
 | email              | string | null: false |
 | last_name          | string | null: false |
-| first_name         | string | nill: false |
-| furigana_last      | string | nill: false |
-| furigana_first     | string | nill: false |
-| date_of_birth      | date   | nill: false |
+| first_name         | string | null: false |
+| furigana_last      | string | null: false |
+| furigana_first     | string | null: false |
+| date_of_birth      | date   | null: false |
 
 # Association
 -has_many :items
@@ -16,14 +16,14 @@
 
 #　Items テーブル
 | Colum              | Type       | Options          |
-| name               | string     | nill: false      |
-| price              | integer    | nill: false      |
-| detail             | text       | nill: false      |
-| category_id        | integer    | nill: false      |
-| quality_id         | integer    | nill: false      |
-| prefecture_id      | integer    | nill: false      |
-| shipped_date_id    | integer    | nill: false      | 
-| shipment_burden_id | integer    | nill: false      |
+| name               | string     | null: false      |
+| price              | integer    | null: false      |
+| detail             | text       | null: false      |
+| category_id        | integer    | null: false      |
+| quality_id         | integer    | null: false      |
+| prefecture_id      | integer    | null: false      |
+| shipped_date_id    | integer    | null: false      | 
+| shipment_burden_id | integer    | null: false      |
 | user               | references | foreign_key: true|
 
 # Association
@@ -46,12 +46,12 @@
 # addresses テーブル
 
 | Colum          | Type       | Option            |
-| zip_code       | string     | nill: false       |
-| prefecture_id  | integer    | nill: false       |
-| municipality   | string     | nill: false       |
+| zip_code       | string     | null: false       |
+| prefecture_id  | integer    | null: false       |
+| municipality   | string     | null: false       |
 | address        | string     | null: false       |
 | building_name  | string     | ----------------- | 
-| tel            | string     | nill: false       |
+| tel            | string     | null: false       |
 | cashier        | references | foreign_key: true |
 
 # Association
