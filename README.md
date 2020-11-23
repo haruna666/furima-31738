@@ -1,24 +1,59 @@
-# README
+# Users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Colum              | Type   | Options     |
+| nickname           | string | null: false |
+| encrypted_password | string | null: false |
+| email              | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| furigana_last      | string | null: false |
+| furigana_first     | string | null: false |
+| date_of_birth      | date   | null: false |
 
-Things you may want to cover:
+# Association
+-has_many :items
+-has_many :cashers
 
-* Ruby version
+#　Items テーブル
+| Colum              | Type       | Options          |
+| name               | string     | null: false      |
+| price              | integer    | null: false      |
+| detail             | text       | null: false      |
+| category_id        | integer    | null: false      |
+| quality_id         | integer    | null: false      |
+| prefecture_id      | integer    | null: false      |
+| shipped_date_id    | integer    | null: false      | 
+| shipment_burden_id | integer    | null: false      |
+| user               | references | foreign_key: true|
 
-* System dependencies
+# Association
 
-* Configuration
+-belongs_to :user
+-has_one :cashier
 
-* Database creation
+# Cashiers テーブル
 
-* Database initialization
+| Colum      | Type       | Option            |
+| user       | references | foreign_key: true |
+| item       | references | foreign_key: true |
 
-* How to run the test suite
+# Association
 
-* Services (job queues, cache servers, search engines, etc.)
+-belongs_to :user
+-belongs_to :item
+-has_one :address
 
-* Deployment instructions
+# addresses テーブル
 
-* ...
+| Colum          | Type       | Option            |
+| zip_code       | string     | null: false       |
+| prefecture_id  | integer    | null: false       |
+| municipality   | string     | null: false       |
+| address        | string     | null: false       |
+| building_name  | string     | ----------------- | 
+| tel            | string     | null: false       |
+| cashier        | references | foreign_key: true |
+
+# Association
+
+-belongs_to :cashier
