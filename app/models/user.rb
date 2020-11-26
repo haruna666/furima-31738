@@ -4,12 +4,25 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, presence: true
-  validates :email, presence: true
-  validates :password_confirmation, presence: true
-  validates :last_name, presence: true
-  validates :first_name, presence: true
-  validates :furigana_first, presence: true
-  validates :furigana_last, presence: true
-  validates :date_of_birth, presence: true
+ with_options presence: true do
+  validates :nickname
+  validates :email
+  validates :password
+  validates :password_confirmation
+  validates :last_name
+  validates :first_name
+  validates :furigana_first
+  validates :furigana_last
+  validates :date_of_birth
+ end
+
+ with_options presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/ } do
+  validates :last_name
+  validates :first_name
+ end
+
+ with_options presence: true, format: {with: /\A[ァ-ヶー－]+\z/ } do
+   validates :furigana_last
+   validates :furigana_first
+ end
 end
