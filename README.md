@@ -14,7 +14,7 @@
 -has_many :items
 -has_many :cashers
 
-#　Items テーブル
+# Items テーブル
 | Colum              | Type       | Options          |
 | name               | string     | null: false      |
 | price              | integer    | null: false      |
