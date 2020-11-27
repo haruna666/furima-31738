@@ -22,7 +22,7 @@
 | category_id        | integer    | null: false      |
 | quality_id         | integer    | null: false      |
 | prefecture_id      | integer    | null: false      |
-| shipped_date_id    | integer    | null: false      | 
+| shipped_date_id    | integer    | null: false      |
 | shipment_burden_id | integer    | null: false      |
 | user               | references | foreign_key: true|
 
