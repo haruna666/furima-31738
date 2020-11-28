@@ -14,13 +14,25 @@ class ItemsController < ApplicationController
 		if @item.save
 			redirect_to root_path
 		else
-			render template: "sessions/new"
+			render :new
+			# render template: "sessions/new"
+		end
+	end
+
+	def edit
+	end
+
+	def update
+		if current_user.update(item_params)
+			redirect_to root_path
+		else
+			render :edit
 		end
 	end
 
 	private
 
 	def item_params
-		params.require(:item).permit(:image, :text, :category_id, :quality_id, :prefecture_id)
+		params.require(:item).permit(:image, :name, :price, :detail, :category_id, :quality_id, :prefecture_id, :shipped_date_id, :shipment_burden_id).merge(user_id: current_user.id)
 	end
 end
