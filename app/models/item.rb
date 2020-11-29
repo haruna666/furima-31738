@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
 	with_options presence: true do
 	validates :name
-	validates :price
+	validates :price, length: { in: 300..9999999 }
 	validates :detail
 	validates :category_id
 	validates :quality_id
@@ -20,9 +20,11 @@ class Item < ApplicationRecord
 	validates :image
 	end
 
-  validates :category_id, numericality: { other_than: 1, message:"Select"}
-  validates :quality_id, numericality: { other_than: 1, message: "Select" }
-  validates :prefecture_id, numericality: { other_than: 1, message: "Select" }
-  validates :shipped_date_id, numericality: { other_than: 1, message: "Select" }
-  validates :shipment_burden_id, numericality: { other_than: 1, message: "Select" }
+  with_options numericality: { other_than: 1, message:"Select"} do
+  validates :category_id
+  validates :quality_id
+  validates :prefecture_id
+  validates :shipped_date_id
+  validates :shipment_burden_id
+  end
 end
