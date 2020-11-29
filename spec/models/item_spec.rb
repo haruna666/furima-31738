@@ -37,25 +37,50 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category Select")
       end
+      it 'category_idが空だとうまくいかない' do
+        @item.category_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
       it 'quality_idが１以外でないと登録できない' do
         @item.quality_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Quality Select")
+      end
+      it 'quality_idが空だとうまくいかない' do
+        @item.quality_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Quality can't be blank")
       end
       it 'prefecture_idが１以外でないと登録できない' do
         @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture Select")
       end
+      it 'prefecure_idが空だとうまくいかない' do
+        @item.prefecture_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
       it 'shipped_date_idが１以外でないと登録できない' do
         @item.shipped_date_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipped date Select")
       end
+      it 'shiooed_date_idが空だとうまくいかない' do
+        @item.shipped_date_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipped date can't be blank")
+      end
       it 'shipment_burden_idが１以外でないと登録できない' do
         @item.shipment_burden_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipment burden Select")
+      end
+      it 'shipmident_burden_idが空だとうまくいかない' do
+        @item.shipment_burden_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipment burden can't be blank")
       end
       it 'user_idが空だとうまくいかない' do
         @item.user_id = nil
