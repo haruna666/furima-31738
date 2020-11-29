@@ -9,8 +9,6 @@ window.addEventListener('load', function(){
 		console.log(addTaxPrice);
 
 		const profitNumber = document.getElementById("profit")
-		// const value_result = inputValue * 0.1
-		// console.log(value_result)
 		profitNumber.innerHTML = (Math.floor(inputValue * 0.9));
 		console.log(profitNumber);
 	})
