@@ -1,13 +1,17 @@
 FactoryBot.define do
   factory :item do
-    name { '帽子' }
-    price { '500' }
-    detail { '可愛いです' }
-    category_id { 'レディース' }
-    quality_id { '新品・未使用' }
-    prefecture_id { '北海道' }
-    shipped_date_id { '1~2日で発送' }
-    shipment_burden_id { '着払い（購入者負担）' }
-    user_id { '2' }
+    name { "あああ" }
+    price {500}
+    detail { "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ" }
+    category_id {2}
+    quality_id {2}
+    prefecture_id {2}
+    shipped_date_id {2}
+    shipment_burden_id {2}
+    association :user
+    
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+    end
   end
 end

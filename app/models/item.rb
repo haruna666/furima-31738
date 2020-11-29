@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
   has_one_attached :image
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :quality
   belongs_to :prefecture
@@ -10,14 +10,15 @@ class Item < ApplicationRecord
 
 	with_options presence: true do
 	validates :name
-	validates :price, length: { in: 300..9999999 }
+	validates :price, numericality: { greater_than: 300, less_than: 10000000 }
 	validates :detail
 	validates :category_id
 	validates :quality_id
 	validates :prefecture_id
 	validates :shipped_date_id
 	validates :shipment_burden_id
-	validates :image
+  validates :image
+  validates :user_id
 	end
 
   with_options numericality: { other_than: 1, message:"Select"} do
