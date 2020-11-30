@@ -127,7 +127,7 @@
     <ul class='item-lists'>
 
 
-      <% if @items %>
+      <% if @items.present? %>
        <% @items.each do |item| %> 
         <li class='list'>
         <div class='item-img-content'>
