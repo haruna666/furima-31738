@@ -1,15 +1,12 @@
-<%# cssは商品出品のものを併用しています。
-app/assets/stylesheets/items/new.css %>
-
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with local: true do |f| %>
+    <%= form_with model: @item, local: true do |f| %>
 
-    <%= render 'shared/error_messages', model: @errors %>
+    <%= render 'shared/error_messages', model: @item %>
 
     <%# 出品画像 %>
     <div class="img-upload">
@@ -21,8 +18,8 @@ app/assets/stylesheets/items/new.css %>
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= image_tag item.image, id:"item-image" if item.image.attached? %>
-        <%# <%= f.file_field :image, id:"item-image" %> 
+        <%= image_tag @item.image, id:"item-image" %>
+        <%= f.file_field :image, id:"item-image" %>
       </div>
     </div>
     <%# /出品画像 %>
@@ -72,17 +69,17 @@ app/assets/stylesheets/items/new.css %>
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-        <%# <%= f.collection_select(:shipment_burden_id, ShipmentBurden.all, :id, :name, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
+        <%= f.collection_select(:shipment_burden_id, ShipmentBurden.all, :id, :name, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
         </div>
-        <%# <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"item-prefecture"}) %> 
+        <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"item-prefecture"}) %>
         <div class="weight-bold-text">
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%# <%= f.collection_select(:shiooed_date_id, ShippedDate.all, :id, :name, {}, {class:"select-box", id:"item-scheduled-delivery"}) %> 
+        <%= f.collection_select(:shipped_date_id, ShippedDate.all, :id, :name, {}, {class:"select-box", id:"item-scheduled-delivery"}) %>
       </div>
     </div>
     <%# /配送について %>
@@ -100,7 +97,7 @@ app/assets/stylesheets/items/new.css %>
             <span class="indispensable">必須</span>
           </div>
           <span class="sell-yen">¥</span>
-          <%# <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
         </div>
         <div class="price-content">
           <span>販売手数料 (10%)</span>
@@ -140,7 +137,7 @@ app/assets/stylesheets/items/new.css %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', "#", class:"back-btn" %>
+      <%=link_to 'もどる', root_path, class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
   </div>
