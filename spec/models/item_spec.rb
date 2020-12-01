@@ -3,6 +3,7 @@ describe Item do
   before do
     user = FactoryBot.create(:user)
     @item = FactoryBot.build(:item, user_id: user.id)
+    @items = FactoryBot.build(:item)
   end
 
   describe '商品出品' do
