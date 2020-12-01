@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :name
-    validates :price, numericality: { greater_than: 300, less_than: 10_000_000 }
+    validates :price, numericality: { greater_than: 290, less_than: 10_000_000 }
     validates :detail
     validates :category_id
     validates :quality_id
