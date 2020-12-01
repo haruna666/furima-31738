@@ -2,7 +2,8 @@ require 'rails_helper'
 describe Item do
   before do
     user = FactoryBot.create(:user)
-    @item = FactoryBot.build(:item,user_id: user.id)
+    @item = FactoryBot.build(:item, user_id: user.id)
+    @items = FactoryBot.build(:item)
   end
 
   describe '商品出品' do
@@ -23,19 +24,19 @@ describe Item do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceが299円以下だと登録できない' do
-        @item.price =299
+        @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than 300')
       end
       it 'priceが10000000円以上だと登録できない' do
-        @item.price =10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than 10000000")
+        expect(@item.errors.full_messages).to include('Price must be less than 10000000')
       end
       it 'category_idが１以外でないと登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category Select")
+        expect(@item.errors.full_messages).to include('Category Select')
       end
       it 'category_idが空だとうまくいかない' do
         @item.category_id = nil
@@ -45,7 +46,7 @@ describe Item do
       it 'quality_idが１以外でないと登録できない' do
         @item.quality_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Quality Select")
+        expect(@item.errors.full_messages).to include('Quality Select')
       end
       it 'quality_idが空だとうまくいかない' do
         @item.quality_id = nil
@@ -55,7 +56,7 @@ describe Item do
       it 'prefecture_idが１以外でないと登録できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture Select")
+        expect(@item.errors.full_messages).to include('Prefecture Select')
       end
       it 'prefecure_idが空だとうまくいかない' do
         @item.prefecture_id = nil
@@ -65,7 +66,7 @@ describe Item do
       it 'shipped_date_idが１以外でないと登録できない' do
         @item.shipped_date_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipped date Select")
+        expect(@item.errors.full_messages).to include('Shipped date Select')
       end
       it 'shiooed_date_idが空だとうまくいかない' do
         @item.shipped_date_id = nil
@@ -75,7 +76,7 @@ describe Item do
       it 'shipment_burden_idが１以外でないと登録できない' do
         @item.shipment_burden_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipment burden Select")
+        expect(@item.errors.full_messages).to include('Shipment burden Select')
       end
       it 'shipmident_burden_idが空だとうまくいかない' do
         @item.shipment_burden_id = nil
