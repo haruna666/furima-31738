@@ -12,7 +12,7 @@
 
 # Association
 -has_many :items
--has_many :cashers
+-has_many :order
 
 # Items テーブル
 | Colum              | Type       | Options          |
@@ -29,9 +29,9 @@
 # Association
 
 -belongs_to :user
--has_one :cashier
+-has_one :order
 
-# Cashiers テーブル
+# Orders テーブル
 
 | Colum      | Type       | Option            |
 | user       | references | foreign_key: true |
@@ -56,4 +56,4 @@
 
 # Association
 
--belongs_to :cashier
+-belongs_to :order
