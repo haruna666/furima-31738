@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+	before_action :authenticate_user!
+	before_action :move_to_index, expect: [:index]
 
 	def index
 		@order = Item.find(params[:item_id])
@@ -20,4 +22,9 @@ class OrdersController < ApplicationController
 		params.require(:order).permit(:name, :price, :shipment_burden_id ).merge(user_id: current_user.id)
 	end
 
+	def move_to_index
+		unless user_signed_in? && current_user.id || @item.user.id
+		redirect_to root_path
+		end
+	end
 end
