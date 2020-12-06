@@ -46,12 +46,12 @@
 # addresses テーブル
 
 | Colum          | Type       | Option            |
-| zip_code       | string     | null: false       |
+| postal_code    | string     | null: false       |
 | prefecture_id  | integer    | null: false       |
-| municipality   | string     | null: false       |
+| city           | string     | null: false       |
 | address        | string     | null: false       |
-| building_name  | string     | ----------------- | 
-| tel            | string     | null: false       |
+| building       | string     | ----------------- | 
+| phone_number   | string     | null: false       |
 | cashier        | references | foreign_key: true |
 
 # Association
