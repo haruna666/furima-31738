@@ -13,6 +13,9 @@ RSpec.describe UserOrder, type: :model do
       it 'postal_code,prefecture_id,city,address,phone_numberが存在すれば購入できる' do
         expect(@userorder).to be_valid
       end
+      it "tokenがあればうまくいく" do
+        expect(@userorder).to be_valid
+      end
       it 'buildingが空でも購入できる' do
         @userorder.building = nil
         expect(@userorder).to be_valid
@@ -58,6 +61,11 @@ RSpec.describe UserOrder, type: :model do
         @userorder.phone_number = '090-1234-5678'
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Phone number is invalid. Input 11 characters.")
+      end
+      it "tokenが空では登録できない" do
+        @userorder.token = nil
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
