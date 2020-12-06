@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :address do
+  factory :user_order do
     postal_code { "123-4567" }
     prefecture_id { 3 }
     city { "あああああ" }
