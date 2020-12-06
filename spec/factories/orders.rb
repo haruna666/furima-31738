@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :order do
-    name {"ああああ"}
-    price { 3000 }
-    shipment_burden_id { 4 }
+    user_id { 3 }
+    item_id { 3 }
   end
 end

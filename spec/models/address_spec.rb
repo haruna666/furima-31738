@@ -13,7 +13,7 @@ RSpec.describe Address, type: :model do
     end
     context '商品購入がうまくいかないとき' do
       it 'postal_codeが空だとうまくいかない' do
-        @order.postal_coad = nil
+        @order.postal_code = nil
         @order.valid?
         expect(@order.errors.full_messages).to include("Postal code can't be blank")
       end
