@@ -1,6 +1,6 @@
 class UserOrder
 	include ActiveModel::Model
-	attr_accessor :token, :user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :phone_number
+	attr_accessor :token, :user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number
 
 	with_options presence: true do
 		validates :user_id
@@ -17,7 +17,7 @@ class UserOrder
 
 	def save
 		# user = User.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, phone_number: phone_number)
-		Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, building: building, address: address, phone_number: phone_number)
 		Order.create(user_id: user_id, item_id: item_id)
+		Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, building: building, address: address, phone_number: phone_number)
 	end
 end
