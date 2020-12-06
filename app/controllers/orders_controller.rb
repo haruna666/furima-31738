@@ -3,23 +3,30 @@ class OrdersController < ApplicationController
 	before_action :move_to_index, expect: [:index]
 
 	def index
-		@order = Item.find(params[:item_id])
+		@item = Item.find(params[:item_id])
+		@userorder = UserOrder.new
 	end
 
 	def create
-		@order = Order.create(order_params)
-		if @order.valid?
-			@order.save
+		@userorder = UserOrder.new(order_params)
+		if @userorder.valid?
+			Payjp.api_key = "sk_test_f7e22c0b893dd0a05fc2626f"
+			Payjp::Charge.create(
+				amount: order_params[:price],
+				card: order_params[:token],
+				currency: 'jpy'
+			)
+			@userorder.save
 			return redirect_to root_path
 		else
-			render 'sessions/new'
+			redirect_to root_path
 		end
 	end
 
 	private
 
 	def order_params
-		params.require(:order).permit(:name, :price, :shipment_burden_id ).merge(user_id: current_user.id)
+		params[:userorder].permit(:item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(token: params[:token], user_id: current_user.id)
 	end
 
 	def move_to_index
