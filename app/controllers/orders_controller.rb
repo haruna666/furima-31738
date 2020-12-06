@@ -11,12 +11,7 @@ class OrdersController < ApplicationController
 		@item = Item.find(params[:item_id])
 		@userorder = UserOrder.new(order_params)
 		if @userorder.valid?
-			# Payjp.api_key = "sk_test_f7e22c0b893dd0a05fc2626f"
-			# Payjp::Charge.create(
-			# 	amount: order_params[:price],
-			# 	card: order_params[:token],
-			# 	currency: 'jpy'
-			# )
+			pay_item
 			@userorder.save
 			return redirect_to root_path
 		else
@@ -27,7 +22,16 @@ class OrdersController < ApplicationController
 	private
 
 	def order_params
-		params.permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(token: params[:token], user_id: current_user.id)
+		params.permit(:item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(token: params[:token], user_id: current_user.id)
+	end
+
+	def pay_item
+		Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+		Payjp::Charge.create(
+			amount: @item.price,
+			card: order_params[:token],
+			currency: 'jpy'
+		)
 	end
 
 	def move_to_index
