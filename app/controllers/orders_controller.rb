@@ -5,6 +5,9 @@ class OrdersController < ApplicationController
 
 	def index
 		@userorder = UserOrder.new
+		if current_user.id == @item.user.id || @item.order.present?
+			redirect_to root_path
+		end
 	end
 
 	def create
@@ -37,9 +40,9 @@ class OrdersController < ApplicationController
 		unless user_signed_in? && current_user.id || @item.user.id
 		redirect_to root_path
 		end
+	end
 
-		def set_order_item
-			@item = Item.find(params[:item_id])
-		end
+	def set_order_item
+		@item = Item.find(params[:item_id])
 	end
 end
