@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user!, only: [:create]
-	# before_action :move_to_index, expect: [:index]
 	before_action :set_order_item
 
 	def index
@@ -24,7 +23,7 @@ class OrdersController < ApplicationController
 	private
 
 	def order_params
-		params.permit(:item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(token: params[:token], user_id: current_user.id)
+		params.permit(:item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :order_id).merge(token: params[:token], user_id: current_user.id)
 	end
 
 	def pay_item
@@ -35,12 +34,6 @@ class OrdersController < ApplicationController
 			currency: 'jpy'
 		)
 	end
-
-	# def move_to_index
-	# 	unless user_signed_in? && current_user.id || @item.user.id
-	# 	redirect_to root_path
-	# 	end
-	# end
 
 	def set_order_item
 		@item = Item.find(params[:item_id])
