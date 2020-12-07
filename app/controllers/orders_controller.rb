@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
-	before_action :authenticate_user!
-	before_action :move_to_index, expect: [:index]
+	before_action :authenticate_user!, only: [:create]
+	# before_action :move_to_index, expect: [:index]
 	before_action :set_order_item
 
 	def index
 		@userorder = UserOrder.new
-		if current_user.id == @item.user.id || @item.order.present?
+		if @item.order.present? || current_user.id == @item.user.id
 			redirect_to root_path
 		end
 	end
@@ -36,11 +36,11 @@ class OrdersController < ApplicationController
 		)
 	end
 
-	def move_to_index
-		unless user_signed_in? && current_user.id || @item.user.id
-		redirect_to root_path
-		end
-	end
+	# def move_to_index
+	# 	unless user_signed_in? && current_user.id || @item.user.id
+	# 	redirect_to root_path
+	# 	end
+	# end
 
 	def set_order_item
 		@item = Item.find(params[:item_id])
