@@ -21,13 +21,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.order.present?
+    if @item.order.present? || current_user.id == @item.user.id
       redirect_to root_path
     end
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def update
