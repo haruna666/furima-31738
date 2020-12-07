@@ -17,7 +17,6 @@ class UserOrder
 	end
 
 	def save
-		# user = User.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, phone_number: phone_number)
 		Order.create(user_id: user_id, item_id: item_id)
 		Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, building: building, address: address, phone_number: phone_number)
 	end
