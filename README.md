@@ -12,7 +12,7 @@
 
 # Association
 -has_many :items
--has_many :order
+-has_many :orders
 
 # Items テーブル
 | Colum              | Type       | Options          |
@@ -52,7 +52,7 @@
 | address        | string     | null: false       |
 | building       | string     | ----------------- | 
 | phone_number   | string     | null: false       |
-| order        | references | foreign_key: true |
+| order          | references | foreign_key: true |
 
 # Association
 
