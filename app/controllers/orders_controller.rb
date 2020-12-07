@@ -1,14 +1,13 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user!
 	before_action :move_to_index, expect: [:index]
+	before_action :set_order_item
 
 	def index
-		@item = Item.find(params[:item_id])
 		@userorder = UserOrder.new
 	end
 
 	def create
-		@item = Item.find(params[:item_id])
 		@userorder = UserOrder.new(order_params)
 		if @userorder.valid?
 			pay_item
@@ -37,6 +36,10 @@ class OrdersController < ApplicationController
 	def move_to_index
 		unless user_signed_in? && current_user.id || @item.user.id
 		redirect_to root_path
+		end
+
+		def set_order_item
+			@item = Item.find(params[:item_id])
 		end
 	end
 end
