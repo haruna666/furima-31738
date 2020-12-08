@@ -9,7 +9,6 @@ class Item < ApplicationRecord
   belongs_to :shipped_date
   belongs_to :shipment_burden
 
-
   with_options presence: true do
     validates :name
     validates :price, numericality: { greater_than: 299, less_than: 10_000_000 }
