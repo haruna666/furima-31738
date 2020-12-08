@@ -4,16 +4,13 @@ RSpec.describe UserOrder, type: :model do
   before do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
-    item = FactoryBot.create(:item,user_id:user2.id)
-    @userorder = FactoryBot.build(:user_order,user_id:user1.id,item_id:item.id)
+    item = FactoryBot.create(:item, user_id: user2.id)
+    @userorder = FactoryBot.build(:user_order, user_id: user1.id, item_id: item.id)
   end
 
   describe '商品購入' do
     context '商品購入がうまくいくとき' do
       it 'postal_code,prefecture_id,city,address,phone_numberが存在すれば購入できる' do
-        expect(@userorder).to be_valid
-      end
-      it "tokenがあればうまくいく" do
         expect(@userorder).to be_valid
       end
       it 'buildingが空でも購入できる' do
@@ -30,12 +27,12 @@ RSpec.describe UserOrder, type: :model do
       it 'prefecture_idが1以外だとうまくいかない' do
         @userorder.prefecture_id = 1
         @userorder.valid?
-        expect(@userorder.errors.full_messages).to include("Prefecture Select")
+        expect(@userorder.errors.full_messages).to include('Prefecture Select')
       end
       it 'prefecture_idが空だとうまくいかない' do
         @userorder.prefecture_id = nil
         @userorder.valid?
-        expect(@userorder.errors.full_messages).to include("Prefecture can't be blank", "Prefecture Select")
+        expect(@userorder.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture Select')
       end
       it 'cityが空だとうまくいかない' do
         @userorder.city = nil
@@ -55,14 +52,19 @@ RSpec.describe UserOrder, type: :model do
       it 'postal_codeにはハイフンがないとうまくいかない' do
         @userorder.postal_code = '1234567'
         @userorder.valid?
-        expect(@userorder.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@userorder.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'phone_numberに数字以外があるとうまくいかない' do
         @userorder.phone_number = '090-1234-5678'
         @userorder.valid?
-        expect(@userorder.errors.full_messages).to include("Phone number is invalid. Input 11 characters.")
+        expect(@userorder.errors.full_messages).to include('Phone number is invalid. Input 11 characters.')
       end
-      it "tokenが空では登録できない" do
+      it 'phone_numberに12桁以上があるとうまくいかない' do
+        @userorder.phone_number = '090123456789'
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include('Phone number is invalid. Input 11 characters.')
+      end
+      it 'tokenが空では登録できない' do
         @userorder.token = nil
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Token can't be blank")

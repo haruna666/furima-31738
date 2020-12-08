@@ -4,8 +4,8 @@ RSpec.describe Order, type: :model do
   before do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
-    item = FactoryBot.create(:item,user_id:user2.id)
-    @userorder = FactoryBot.build(:user_order,user_id:user1.id,item_id:item.id)
+    item = FactoryBot.create(:item, user_id: user2.id)
+    @userorder = FactoryBot.build(:user_order, user_id: user1.id, item_id: item.id)
   end
 
   describe '商品購入' do
@@ -27,7 +27,7 @@ RSpec.describe Order, type: :model do
       it 'prefecture_idが1以外だとうまくいかない' do
         @userorder.prefecture_id = 1
         @userorder.valid?
-        expect(@userorder.errors.full_messages).to include("Prefecture id Select")
+        expect(@userorder.errors.full_messages).to include('Prefecture id Select')
       end
       it 'prefecture_idが空だとうまくいかない' do
         @userorder.prefecture_id = nil
@@ -52,12 +52,12 @@ RSpec.describe Order, type: :model do
       it 'postal_codeにはハイフンがないとうまくいかない' do
         @userorder.postal_code = '1234567'
         @userorder.valid?
-        expect(@userorder.errors.full_messages).to include("Postal code invalid. Include hyphen(-)")
+        expect(@userorder.errors.full_messages).to include('Postal code invalid. Include hyphen(-)')
       end
       it 'phone_numberに数字以外があるとうまくいかない' do
         @userorder.phone_number = '090-1234-5678'
         @userorder.valid?
-        expect(@usdorder.errors.full_messages).to include("Phone number invalid.")
+        expect(@usdorder.errors.full_messages).to include('Phone number invalid.')
       end
     end
   end
