@@ -21,13 +21,14 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path if @item.order.present? || current_user.id == @item.user.id
   end
 
   def show
   end
 
   def update
-    current_user.id == @item.user.id 
+    current_user.id == @item.user.id
     if @item.update(item_params)
       redirect_to root_path
     else
@@ -36,9 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.user.id
-     @item.destroy
-    end
+    @item.destroy if current_user.id == @item.user.id
     redirect_to root_path
   end
 

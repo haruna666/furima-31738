@@ -12,7 +12,7 @@
 
 # Association
 -has_many :items
--has_many :cashers
+-has_many :orders
 
 # Items テーブル
 | Colum              | Type       | Options          |
@@ -29,9 +29,9 @@
 # Association
 
 -belongs_to :user
--has_one :cashier
+-has_one :order
 
-# Cashiers テーブル
+# Orders テーブル
 
 | Colum      | Type       | Option            |
 | user       | references | foreign_key: true |
@@ -46,14 +46,14 @@
 # addresses テーブル
 
 | Colum          | Type       | Option            |
-| zip_code       | string     | null: false       |
+| postal_code    | string     | null: false       |
 | prefecture_id  | integer    | null: false       |
-| municipality   | string     | null: false       |
+| city           | string     | null: false       |
 | address        | string     | null: false       |
-| building_name  | string     | ----------------- | 
-| tel            | string     | null: false       |
-| cashier        | references | foreign_key: true |
+| building       | string     | ----------------- | 
+| phone_number   | string     | null: false       |
+| order          | references | foreign_key: true |
 
 # Association
 
--belongs_to :cashier
+-belongs_to :order
