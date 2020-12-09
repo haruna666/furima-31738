@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :index]
   before_action :set_order_item
+  # before_action :order_move_to_index, only: [:index]
 
   def index
     @userorder = UserOrder.new
@@ -36,4 +37,10 @@ class OrdersController < ApplicationController
   def set_order_item
     @item = Item.find(params[:item_id])
   end
+
+  # def order_move_to_index
+  #   if @item.order.nil?
+  #     redirect root_path
+  #   end
+  # end
 end
