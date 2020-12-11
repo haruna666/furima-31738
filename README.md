@@ -30,6 +30,7 @@
 
 -belongs_to :user
 -has_one :order
+-has_many :images
 
 # Orders テーブル
 
@@ -57,4 +58,14 @@
 # Association
 
 -belongs_to :order
+
+# images テーブル
+
+| Colum       | Type          |Option             |
+| image       |               |                   |
+| item        | references    | foreign_key: true |
+
+# Association
+
+-belongs_to :item
 
